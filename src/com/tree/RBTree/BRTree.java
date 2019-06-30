@@ -155,4 +155,47 @@ public class BRTree<K extends Comparable<K>, V> {
         return node;
     }
 
+    /**
+     * get
+     * @param key key
+     * @return value
+     */
+    public V get(K key) {
+        Node node = getNode(root, key);
+        return node == null ? null : node.value;
+    }
+
+    /**
+     * 递归查找key对应的节点
+     * @param node
+     * @param key
+     * @return
+     */
+    private Node getNode(Node node, K key) {
+        if (null == node) {
+            return null;
+        }
+
+        if (key.equals(node.key)) {
+            return node;
+        } else if (key.compareTo(node.key) < 0) {
+            return getNode(node.left, key);
+        } else {
+            return getNode(node.left, key);
+        }
+    }
+
+    /**
+     * set
+     * @param key key
+     */
+    public void set(K key, V newValue) {
+        Node node = getNode(root, key);
+        if (null == node) {
+            throw new IllegalArgumentException(key + "does't exist.");
+        }
+
+        node.value = newValue;
+    }
+
 }
