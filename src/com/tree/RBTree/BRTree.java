@@ -181,7 +181,7 @@ public class BRTree<K extends Comparable<K>, V> {
         } else if (key.compareTo(node.key) < 0) {
             return getNode(node.left, key);
         } else {
-            return getNode(node.left, key);
+            return getNode(node.right, key);
         }
     }
 
