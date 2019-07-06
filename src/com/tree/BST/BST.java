@@ -51,6 +51,7 @@ public class BST<E extends Comparable<E>> {
         }
 
         if (e.compareTo(node.e) < 0) {
+            // 添加返回值将new出来的节点挂载到树上
             node.left = add(node.left, e);
         } else if (e.compareTo(node.e) > 0) {
             node.right = add(node.right, e);
@@ -59,11 +60,44 @@ public class BST<E extends Comparable<E>> {
         return node;
     }
 
+    /**
+     * 是否包含元素e
+     * @param e
+     * @return
+     */
+    public boolean contains(E e) {
+        return contains(root, e);
+    }
+
+    /**
+     * 以node为根的二叉搜索树是否包含元素e
+     * @param node
+     * @param e
+     * @return
+     */
+    private boolean contains(Node node, E e) {
+        if (null == node) {
+            return false;
+        }
+
+        if (e.compareTo(node.e) == 0) {
+            return true;
+        } else if (e.compareTo(node.e) < 0) {
+            return contains(node.left, e);
+        } else  {
+            return contains(node.right, e);
+        }
+    }
+
     public static void main(String[] args) {
         BST<Integer> bst = new BST<>();
         Integer[] arr = new Integer[] {16, 8, 22, 1, 9, 17, 30};
         for (int i = 0; i < arr.length; i ++) {
             bst.add(arr[i]);
+        }
+
+        if (bst.contains(88)) {
+            System.out.println("----");
         }
     }
 }
