@@ -1,10 +1,5 @@
 package com.tree.RBTree;
 
-import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
-import sun.applet.Main;
-
-import java.time.temporal.ChronoUnit;
-
 /**
  * read-black tree
  * @param <AnyType>
@@ -142,5 +137,35 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
         } else {
             return item.compareTo(node.element);
         }
+    }
+
+    public void insert(AnyType item) {
+        current = parent = grand = header;
+        nullNode.element = item;
+
+        while (compare(item, current) != 0) {
+            great = grand;
+            grand = parent;
+            parent = current;
+            current = compare(item, current) < 0 ? current.left : current.right;
+
+            if (current.left.color == RED && current.right.color == RED) {
+                handleReorient(item);
+            }
+        }
+
+        if (current != nullNode) {
+            return;
+        }
+
+        current = new RedBlackNode<>(item, nullNode, nullNode);
+
+        if (compare(item, parent) < 0) {
+            parent.left = current;
+        } else {
+            parent.right = current;
+        }
+
+        handleReorient(item);
     }
 }
