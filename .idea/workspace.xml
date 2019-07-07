@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a2c93fc-e04b-4479-8b2e-2f6263a3f4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/tree/BST/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/tree/RBTree/RedBlackTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tree/RBTree/RedBlackTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/tree/BST/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tree/BST/BST.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,20 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RedBlackTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/tree/RBTree/RedBlackTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BST.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tree/BST/BST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+            <state relative-caret-position="192">
+              <caret line="147" column="17" selection-start-line="147" selection-start-column="17" selection-end-line="147" selection-end-column="17" />
               <folding>
                 <element signature="e#459#460#0" expanded="true" />
                 <element signature="e#486#487#0" expanded="true" />
@@ -37,16 +28,24 @@
                 <element signature="e#381#382#0" expanded="true" />
                 <element signature="e#582#583#0" expanded="true" />
                 <element signature="e#617#618#0" expanded="true" />
+                <element signature="e#1181#1182#0" expanded="true" />
+                <element signature="e#1221#1222#0" expanded="true" />
+                <element signature="e#2048#2049#0" expanded="true" />
+                <element signature="e#2078#2079#0" expanded="true" />
+                <element signature="e#2088#2089#0" expanded="true" />
+                <element signature="e#2118#2119#0" expanded="true" />
+                <element signature="e#2442#2443#0" expanded="true" />
+                <element signature="e#2471#2472#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BRTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/tree/RBTree/BRTree.java">
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="192">
+              <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -76,6 +75,7 @@
         <option value="$PROJECT_DIR$/src/com/tree/RBTree/RedBlackTree.java" />
         <option value="$PROJECT_DIR$/src/com/tree/BRTree.java" />
         <option value="$PROJECT_DIR$/src/com/tree/RBTree/BRTree.java" />
+        <option value="$PROJECT_DIR$/src/com/Test.java" />
         <option value="$PROJECT_DIR$/src/com/tree/BST/BST.java" />
       </list>
     </option>
@@ -126,21 +126,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="data-structures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="data-structures" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="data-structures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="data-structures" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="BST" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -172,7 +157,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BST">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="BST" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tree.BST.BST" />
       <module name="data-structures" />
@@ -191,6 +176,17 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.stack.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Test" />
+      <module name="data-structures" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -239,9 +235,11 @@
     <list>
       <item itemvalue="Application.InfixToSuffix" />
       <item itemvalue="Application.BST" />
+      <item itemvalue="Application.Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.BST" />
         <item itemvalue="Application.InfixToSuffix" />
       </list>
@@ -265,7 +263,7 @@
       <workItem from="1561985387171" duration="3918000" />
       <workItem from="1562254875518" duration="735000" />
       <workItem from="1562326981825" duration="8270000" />
-      <workItem from="1562418002519" duration="6009000" />
+      <workItem from="1562418002519" duration="10896000" />
     </task>
     <task id="LOCAL-00001" summary="删除class文件">
       <created>1561742321793</created>
@@ -309,11 +307,25 @@
       <option name="project" value="LOCAL" />
       <updated>1562342271197</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="二叉搜索树">
+      <created>1562427232880</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1562427232880</updated>
+    </task>
+    <task id="LOCAL-00008" summary="二叉搜索树的contains方法">
+      <created>1562429776106</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1562429776106</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41721000" />
+    <option name="totallyTimeSpent" value="46608000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -327,7 +339,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32983023" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.13799283" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4014337" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20210186" />
@@ -335,7 +347,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.2497979" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.26881722" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4050179" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -355,11 +367,21 @@
     <MESSAGE value="红黑树添加元素" />
     <MESSAGE value="get、set方法的实现" />
     <MESSAGE value="红黑树自顶向下的实现方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="红黑树自顶向下的实现方式" />
+    <MESSAGE value="二叉搜索树" />
+    <MESSAGE value="二叉搜索树的contains方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="二叉搜索树的contains方法" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/tree/BST/BST.java</url>
+          <line>123</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="11" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -481,15 +503,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tree/RBTree/BRTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="-416">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tree/BST/BST.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+        <state relative-caret-position="192">
+          <caret line="147" column="17" selection-start-line="147" selection-start-column="17" selection-end-line="147" selection-end-column="17" />
           <folding>
             <element signature="e#459#460#0" expanded="true" />
             <element signature="e#486#487#0" expanded="true" />
@@ -497,6 +526,14 @@
             <element signature="e#381#382#0" expanded="true" />
             <element signature="e#582#583#0" expanded="true" />
             <element signature="e#617#618#0" expanded="true" />
+            <element signature="e#1181#1182#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
+            <element signature="e#2048#2049#0" expanded="true" />
+            <element signature="e#2078#2079#0" expanded="true" />
+            <element signature="e#2088#2089#0" expanded="true" />
+            <element signature="e#2118#2119#0" expanded="true" />
+            <element signature="e#2442#2443#0" expanded="true" />
+            <element signature="e#2471#2472#0" expanded="true" />
           </folding>
         </state>
       </provider>

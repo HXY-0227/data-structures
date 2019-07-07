@@ -89,15 +89,63 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-    public static void main(String[] args) {
-        BST<Integer> bst = new BST<>();
-        Integer[] arr = new Integer[] {16, 8, 22, 1, 9, 17, 30};
-        for (int i = 0; i < arr.length; i ++) {
-            bst.add(arr[i]);
-        }
+    /**
+     * 前序遍历
+     */
+    public void preOrder() {
+        preOrder(root);
+    }
 
-        if (bst.contains(88)) {
-            System.out.println("----");
+    /**
+     * 前序遍历 先访问根节点，在访问左右子树, 递归算法
+     * @param node
+     */
+    private void preOrder(Node node) {
+        if (null == node) {
+            return;
         }
+        System.out.println(node.e);
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    /**
+     * 中序遍历
+     */
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    /**
+     * 中序遍历 先访问左子树，在访问根节点和右子树, 递归算法
+     * @param node
+     */
+    private void inOrder(Node node) {
+        if (null == node) {
+            return;
+        }
+        inOrder(node.left);
+        System.out.println(node.e);
+        inOrder(node.right);
+    }
+
+    /**
+     * 后序遍历
+     */
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    /**
+     * 前序遍历 先访问左子树，在访问右子树和根节点, 递归算法
+     * @param node
+     */
+    private void postOrder(Node node) {
+        if (null == node) {
+            return;
+        }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.println(node.e);
     }
 }
