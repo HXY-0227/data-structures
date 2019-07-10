@@ -9,7 +9,7 @@ public class Test {
         for (int i = 0; i < arr.length; i ++) {
             bst.add(arr[i]);
         }
-
-        bst.inOrder();
+        //bst.remove(1);
+        System.out.println(bst.minNum());
     }
 }
