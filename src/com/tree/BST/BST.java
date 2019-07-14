@@ -1,20 +1,12 @@
 package com.tree.BST;
 
-import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.sun.org.apache.regexp.internal.REUtil;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.omg.CORBA.INTERNAL;
+
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class BST<E extends Comparable<E>> {
 
-    @Data
     private class Node {
         E e;
         Node right;
@@ -341,7 +333,9 @@ public class BST<E extends Comparable<E>> {
             }
 
             // 待删除节点左右子树都不为空
+            // 找到待删除元素的右子树的最小节点，替换待删除元素
             Node successor = minNum(node.right);
+            // successor现在替换了node的位置，就要将successor从原来的位置删除
             successor.right = removeMin(node.right);
             successor.left = node.left;
             node.left = null;
