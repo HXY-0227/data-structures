@@ -1,10 +1,20 @@
 package com.tree.BST;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.sun.org.apache.regexp.internal.REUtil;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.omg.CORBA.INTERNAL;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class BST<E extends Comparable<E>> {
 
+    @Data
     private class Node {
         E e;
         Node right;
@@ -15,6 +25,7 @@ public class BST<E extends Comparable<E>> {
             this.right = null;
             this.left = null;
         }
+
     }
 
     private Node root;
@@ -128,6 +139,8 @@ public class BST<E extends Comparable<E>> {
             return;
         }
         inOrder(node.left);
+        //Gson gson = new Gson();
+        //String json = gson.toJson(node);
         System.out.println(node.e);
         inOrder(node.right);
     }
@@ -161,15 +174,21 @@ public class BST<E extends Comparable<E>> {
         }
 
         Queue<Node> queue = new LinkedList<>();
+        Queue<Node> levelQueue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             Node cur = queue.remove();
-            System.out.println(cur.e);
+            System.out.print(cur.e + " ");
             if (null != cur.left) {
                 queue.add(cur.left);
             }
             if (null != cur.right) {
                 queue.add(cur.right);
+            }
+            if(queue.isEmpty()){
+                System.out.println();
+                queue.addAll(levelQueue);
+                levelQueue.clear();
             }
         }
     }
@@ -211,8 +230,8 @@ public class BST<E extends Comparable<E>> {
 
     /**
      * 递归获取最小元素，从树的左边遍历
-     * @param node
-     * @return
+     * @param node 根节点
+     * @return 以node为根的最小节点
      */
     private Node minNum(Node node) {
         if (null == node.left) {
@@ -224,7 +243,7 @@ public class BST<E extends Comparable<E>> {
 
     /**
      * 移除最大元素
-     * @return
+     * @return 最大元素值
      */
     public E removeMax() {
         E e = maxNum();
@@ -234,8 +253,8 @@ public class BST<E extends Comparable<E>> {
 
     /**
      * 移除最大元素
-     * @param
-     * @return
+     * @param node 根节点
+     * @return 移除后根节点
      */
     private Node removeMax(Node node) {
         // 如果右子树为空，则根节点为最大节点，删除根节点
@@ -329,5 +348,91 @@ public class BST<E extends Comparable<E>> {
             node.right = null;
             return successor;
         }
+    }
+
+    /**
+     * 查找key的floor值
+     * @param key
+     * @return
+     */
+    public E floor(E key) {
+        if (key.compareTo(minNum()) < 0) {
+            return null;
+        }
+
+        return floor(root, key);
+    }
+
+    /**
+     * 查找key的floor值
+     * @param node
+     * @param key
+     * @return
+     */
+    private E floor(Node node, E key) {
+        if (null == node) {
+            return null;
+        }
+
+        // 如果key和node值相等，node就是key对应的floor节点
+        if (key.compareTo(node.e) == 0) {
+            return key;
+        }
+
+        // 如果key比node的值小，那么对应的floor节点肯定在node的左子树
+        if (key.compareTo(node.e) < 0) {
+            return floor(node.left, key);
+        }
+
+        // 如果key比node的值大，node有可能是key对应的floor节点，也有可能不是
+        E floor = floor(node.right, key);
+        if (floor != null) {
+            return floor;
+        }
+
+        return node.e;
+    }
+
+    /**
+     * 查找key的ceil值
+     * @param key
+     * @return
+     */
+    public E ceil(E key) {
+        if (key.compareTo(maxNum()) > 0) {
+            return null;
+        }
+
+        return ceil(root, key);
+    }
+
+    /**
+     * 查找key的ceil值
+     * @param node
+     * @param key
+     * @return
+     */
+    private E ceil(Node node, E key) {
+        if (null == node) {
+            return null;
+        }
+
+        // 如果key和node值相等，node就是key对应的ceil节点
+        if (key.compareTo(node.e) == 0) {
+            return key;
+        }
+
+        // 如果key比node的值大，那么对应的ceil节点肯定在node的右子树
+        if (key.compareTo(node.e) > 0) {
+            return ceil(node.right, key);
+        }
+
+        // 如果key比node的值小，node有可能是key对应的ceil节点，也有可能不是
+        E ceil = ceil(node.left, key);
+        if (ceil != null) {
+            return ceil;
+        }
+
+        return node.e;
     }
 }
