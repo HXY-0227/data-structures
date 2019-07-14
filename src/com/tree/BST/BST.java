@@ -435,4 +435,25 @@ public class BST<E extends Comparable<E>> {
 
         return node.e;
     }
+
+    /**
+     * 求树的深度
+     * @return 树的深度
+     */
+    public int depth() {
+        return depth(root);
+    }
+
+    /**
+     * 求树的深度
+     * @return node为节点的书的树的深度
+     */
+    private int depth(Node node){
+        if (null == node) {
+            return 0;
+        }
+        int leftDepth = depth(node.left);
+        int rightDepth = depth(node.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
 }
