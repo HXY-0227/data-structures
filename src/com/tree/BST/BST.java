@@ -2,18 +2,23 @@ package com.tree.BST;
 
 
 
+
+import sun.awt.SunHints;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BST<E extends Comparable<E>> {
+public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 
     private class Node {
-        E e;
+        K key;
+        V value;
         Node right;
         Node left;
 
-        public Node(E e) {
-            this.e = e;
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
             this.right = null;
             this.left = null;
         }
@@ -38,60 +43,98 @@ public class BST<E extends Comparable<E>> {
 
     /**
      * 添加元素
-     * @param e
+     * @param key
+     * @param value
      */
-    public void add(E e) {
-        root = add(root, e);
+    public void add(K key, V value) {
+        root = add(root, key, value);
     }
 
     /**
      * 递归添加元素
      * @param node
-     * @param e
+     * @param key
+     * @param value
      * @return 返回插入新节后二叉搜索树的根
      */
-    private Node add(Node node, E e) {
+    private Node add(Node node, K key, V value) {
         if (null == node) {
             size ++;
-            return new Node(e);
+            return new Node(key, value);
         }
 
-        if (e.compareTo(node.e) < 0) {
+        if (key.compareTo(node.key) < 0) {
             // 添加返回值将new出来的节点挂载到树上
-            node.left = add(node.left, e);
-        } else if (e.compareTo(node.e) > 0) {
-            node.right = add(node.right, e);
+            node.left = add(node.left, key, value);
+        } else if (key.compareTo(node.key) > 0) {
+            node.right = add(node.right, key, value);
+        } else {
+            node.value = value;
         }
 
         return node;
     }
 
+    public V get(K key) {
+        Node node = getNode(root, key);
+        return null == node ? null : node.value;
+    }
+
+    public void set(K key, V newValue) {
+        Node node = getNode(root, key);
+        if (null == node) {
+            throw new IllegalArgumentException(key + "does not exists");
+        }
+
+        node.value = newValue;
+    }
+
     /**
      * 是否包含元素e
-     * @param e
+     * @param key
      * @return
      */
-    public boolean contains(E e) {
-        return contains(root, e);
+    public boolean contains(K key) {
+        return contains(root, key);
     }
 
     /**
      * 以node为根的二叉搜索树是否包含元素e
      * @param node
-     * @param e
+     * @param key
      * @return
      */
-    private boolean contains(Node node, E e) {
+    private boolean contains(Node node, K key) {
         if (null == node) {
             return false;
         }
 
-        if (e.compareTo(node.e) == 0) {
+        if (key.compareTo(node.key) == 0) {
             return true;
-        } else if (e.compareTo(node.e) < 0) {
-            return contains(node.left, e);
+        } else if (key.compareTo(node.key) < 0) {
+            return contains(node.left, key);
         } else  {
-            return contains(node.right, e);
+            return contains(node.right, key);
+        }
+    }
+
+    /**
+     * 返回key所在的节点
+     * @param node
+     * @param key
+     * @return
+     */
+    private Node getNode(Node node, K key) {
+        if (null == node) {
+            return null;
+        }
+
+        if (key.compareTo(node.key) > 0) {
+            return getNode(node.right, key);
+        } else if (key.compareTo(node.key) < 0) {
+            return getNode(node.left, key);
+        } else {
+            return node;
         }
     }
 
@@ -110,7 +153,7 @@ public class BST<E extends Comparable<E>> {
         if (null == node) {
             return;
         }
-        System.out.println(node.e);
+        System.out.println(node.key);
         preOrder(node.left);
         preOrder(node.right);
     }
@@ -133,7 +176,7 @@ public class BST<E extends Comparable<E>> {
         inOrder(node.left);
         //Gson gson = new Gson();
         //String json = gson.toJson(node);
-        System.out.println(node.e);
+        System.out.println(node.key);
         inOrder(node.right);
     }
 
@@ -154,7 +197,7 @@ public class BST<E extends Comparable<E>> {
         }
         postOrder(node.left);
         postOrder(node.right);
-        System.out.println(node.e);
+        System.out.println(node.key);
     }
 
     /**
@@ -170,7 +213,7 @@ public class BST<E extends Comparable<E>> {
         queue.add(root);
         while (!queue.isEmpty()) {
             Node cur = queue.remove();
-            System.out.print(cur.e + " ");
+            System.out.print(cur.key + " ");
             if (null != cur.left) {
                 queue.add(cur.left);
             }
@@ -188,12 +231,12 @@ public class BST<E extends Comparable<E>> {
     /**
      * 获取二叉搜索树的最大节点
      */
-    public E maxNum() {
+    public V maxNum() {
         if (size == 0) {
             throw new IllegalArgumentException("BSI is empty");
         }
 
-        return maxNum(root).e;
+        return maxNum(root).value;
     }
 
     /**
@@ -212,12 +255,12 @@ public class BST<E extends Comparable<E>> {
     /**
      * 获取二叉搜索树的最小节点
      */
-    public E minNum() {
+    public V minNum() {
         if (size == 0) {
             throw new IllegalArgumentException("BSI is empty");
         }
 
-        return minNum(root).e;
+        return minNum(root).value;
     }
 
     /**
@@ -237,10 +280,10 @@ public class BST<E extends Comparable<E>> {
      * 移除最大元素
      * @return 最大元素值
      */
-    public E removeMax() {
-        E e = maxNum();
+    public V removeMax() {
+        V value = maxNum();
         removeMax(root);
-        return e;
+        return value;
     }
 
     /**
@@ -265,10 +308,10 @@ public class BST<E extends Comparable<E>> {
      * 删除最小元素
      * @return 最小元素的值
      */
-    public E removeMin() {
-        E e = minNum();
+    public V removeMin() {
+        V value = minNum();
         removeMin(root);
-        return e;
+        return value;
     }
 
     /**
@@ -291,28 +334,28 @@ public class BST<E extends Comparable<E>> {
 
     /**
      * 删除指定元素
-     * @param e
+     * @param key
      */
-    public void remove(E e) {
-        root = remove(root, e);
+    public void remove(K key) {
+        root = remove(root, key);
     }
 
     /**
      * 删除指定元素
      * @param node 节点
-     * @param e 待删除的元素
+     * @param key 待删除的key
      * @return 删除后的根节点
      */
-    private Node remove(Node node, E e) {
+    private Node remove(Node node, K key) {
         if (null == node) {
             return null;
         }
 
-        if (e.compareTo(node.e) < 0) {
-            node.left = remove(node.left, e);
+        if (key.compareTo(node.key) < 0) {
+            node.left = remove(node.left, key);
             return node;
-        } else if (e.compareTo(node.e) > 0) {
-            node.right = remove(node.right, e);
+        } else if (key.compareTo(node.key) > 0) {
+            node.right = remove(node.right, key);
             return node;
         } else {
 
@@ -349,8 +392,9 @@ public class BST<E extends Comparable<E>> {
      * @param key
      * @return
      */
-    public E floor(E key) {
-        if (key.compareTo(minNum()) < 0) {
+    public V floor(K key) {
+        V value = get(key);
+        if (value.compareTo(minNum()) < 0) {
             return null;
         }
 
@@ -363,28 +407,28 @@ public class BST<E extends Comparable<E>> {
      * @param key
      * @return
      */
-    private E floor(Node node, E key) {
+    private V floor(Node node, K key) {
         if (null == node) {
             return null;
         }
 
-        // 如果key和node值相等，node就是key对应的floor节点
-        if (key.compareTo(node.e) == 0) {
-            return key;
+        // 如果key和当前node的key值相等，node就是key对应的floor节点
+        if (key.compareTo(node.key) == 0) {
+            return node.value;
         }
 
-        // 如果key比node的值小，那么对应的floor节点肯定在node的左子树
-        if (key.compareTo(node.e) < 0) {
+        // 如果key比当前node的key值小，那么对应的floor节点肯定在node的左子树
+        if (key.compareTo(node.key) < 0) {
             return floor(node.left, key);
         }
 
-        // 如果key比node的值大，node有可能是key对应的floor节点，也有可能不是
-        E floor = floor(node.right, key);
+        // 如果key比当前node的key值大，node有可能是key对应的floor节点，也有可能不是
+        V floor = floor(node.right, key);
         if (floor != null) {
             return floor;
         }
 
-        return node.e;
+        return node.value;
     }
 
     /**
@@ -392,8 +436,9 @@ public class BST<E extends Comparable<E>> {
      * @param key
      * @return
      */
-    public E ceil(E key) {
-        if (key.compareTo(maxNum()) > 0) {
+    public V ceil(K key) {
+        V value = get(key);
+        if (value.compareTo(maxNum()) > 0) {
             return null;
         }
 
@@ -406,28 +451,28 @@ public class BST<E extends Comparable<E>> {
      * @param key
      * @return
      */
-    private E ceil(Node node, E key) {
+    private V ceil(Node node, K key) {
         if (null == node) {
             return null;
         }
 
         // 如果key和node值相等，node就是key对应的ceil节点
-        if (key.compareTo(node.e) == 0) {
-            return key;
+        if (key.compareTo(node.key) == 0) {
+            return node.value;
         }
 
         // 如果key比node的值大，那么对应的ceil节点肯定在node的右子树
-        if (key.compareTo(node.e) > 0) {
+        if (key.compareTo(node.key) > 0) {
             return ceil(node.right, key);
         }
 
         // 如果key比node的值小，node有可能是key对应的ceil节点，也有可能不是
-        E ceil = ceil(node.left, key);
+        V ceil = ceil(node.left, key);
         if (ceil != null) {
             return ceil;
         }
 
-        return node.e;
+        return node.value;
     }
 
     /**
