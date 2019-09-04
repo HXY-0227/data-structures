@@ -1,10 +1,5 @@
 package com.tree.BST;
 
-
-
-
-import sun.awt.SunHints;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -33,7 +28,7 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         this.size = 0;
     }
 
-    private int size() {
+    public int size() {
         return size;
     }
 
@@ -174,8 +169,6 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             return;
         }
         inOrder(node.left);
-        //Gson gson = new Gson();
-        //String json = gson.toJson(node);
         System.out.println(node.key);
         inOrder(node.right);
     }
@@ -495,4 +488,5 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         int rightDepth = depth(node.right);
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
 }
