@@ -50,7 +50,8 @@ public class Array<E> {
      */
     public void add(E e) {
         if (size == data.length) {
-            throw new ArrayIndexOutOfBoundsException();
+            // 扩容
+            resize(2 * data.length);
         }
 
         data[size] = e;
@@ -63,12 +64,12 @@ public class Array<E> {
      * @param e
      */
     public void add(int index, E e) {
-        if (size == data.length) {
+        if (index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException();
         }
 
-        if (index < 0 || index > size) {
-            throw new ArrayIndexOutOfBoundsException();
+        if (size == data.length) {
+            resize(2 * data.length);
         }
 
         for (int i = size -1; i >= index; i--) {
@@ -144,11 +145,15 @@ public class Array<E> {
 
         E removeData = data[index];
 
-        for (int i = index; i < size; i++) {
-            data[i] = data[i + 1];
+        for (int i = index + 1 ; i < size; i++) {
+            data[i - 1] = data[i];
         }
         size --;
         data[size] = null;
+        // 释放内存  元素个数变成总容量的1/4才缩容，解决复杂度震荡的问题。
+        if (size == data.length / 4 && data.length / 2 != 0) {
+            resize(data.length / 2);
+        }
         return removeData;
     }
 
@@ -179,13 +184,25 @@ public class Array<E> {
         return res.toString();
     }
 
+    /**
+     * 扩容
+     * @param newCapacity
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < data.length; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+    }
+
     public static void main(String[] args) {
-        Array arr = new Array(11);
+        Array arr = new Array(10);
         for (int i = 0; i < 10; i++) {
             arr.add(i + "hxy");
         }
         System.out.println(arr);
-        arr.removeElement("1hxy");
+        arr.add("love");
         System.out.println(arr);
     }
 }
