@@ -78,7 +78,14 @@ public class Array<E> {
 
         data[index] = e;
         size ++;
+    }
 
+    /**
+     * 向数组中最后一个位置添加元素
+     * @param e
+     */
+    public void addLast(E e) {
+        add(size, e);
     }
 
     /**
@@ -105,6 +112,24 @@ public class Array<E> {
 
         return data[index];
     }
+
+    /**
+     * 获取数组最后一个元素
+     * @return
+     */
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    /**
+     * 获取数组第一个元素
+     * @return
+     */
+    public E getFirst() {
+        return get(0);
+    }
+
+
 
     /**
      * 是否包含某元素
@@ -158,6 +183,14 @@ public class Array<E> {
     }
 
     /**
+     * 移除数组中最后一个元素
+     * @return
+     */
+    public E removeLast() {
+        return remove(size - 1);
+    }
+
+    /**
      * 删除指定元素
      * @param e 待删除的元素
      */
@@ -167,6 +200,18 @@ public class Array<E> {
             remove(index);
         }
      }
+
+    /**
+     * 扩容
+     * @param newCapacity
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < data.length; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+    }
 
     @Override
     public String toString() {
@@ -182,18 +227,6 @@ public class Array<E> {
         res.append("]");
 
         return res.toString();
-    }
-
-    /**
-     * 扩容
-     * @param newCapacity
-     */
-    private void resize(int newCapacity) {
-        E[] newData = (E[]) new Object[newCapacity];
-        for (int i = 0; i < data.length; i++) {
-            newData[i] = data[i];
-        }
-        data = newData;
     }
 
     public static void main(String[] args) {
