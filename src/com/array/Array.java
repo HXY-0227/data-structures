@@ -183,6 +183,14 @@ public class Array<E> {
     }
 
     /**
+     * 移除数组中第一个元素
+     * @return
+     */
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    /**
      * 移除数组中最后一个元素
      * @return
      */
