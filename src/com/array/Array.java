@@ -221,6 +221,19 @@ public class Array<E> {
         data = newData;
     }
 
+    /**
+     * 交换元素
+     * @param i
+     * @param j
+     */
+    public void swap(int i, int j) {
+        if (i < 0 || i > size) {
+            throw new IllegalArgumentException("index is illegal");
+        }
+        E e = data[i];
+        data[i] = data[j];
+        data[j] = e;
+    }
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
