@@ -66,5 +66,48 @@
     }
 ```
 
+## 从堆中删除元素
 
+<img src="下沉操作.png" alt="下沉操作" style="zoom:67%;" />
+
+删除元素的过程如图所示：首先删除堆顶元素，然后将最后一个元素挪到堆顶，这个时候破坏了堆的性质，就开始执行下沉操作，让堆顶元素和孩子比较，将较大的孩子上移，堆顶元素下沉，直到符合堆的条件为止。
+
+```
+    /**
+     * 取出堆中最大元素
+     *
+     * @return
+     */
+    public E extractMax() {
+        E maxItem = findMax();
+
+        data.swap(0, data.getSize() - 1);
+        data.removeLast();
+        siftDown(0);
+
+        return maxItem;
+    }
+
+    /**
+     * 堆中元素的下沉
+     *
+     * @param index
+     */
+    private void siftDown(int index) {
+        int childIndex = 0;
+        while (getLeftChildIndex(index) < data.getSize()) {
+            childIndex = getLeftChildIndex(index);
+            // 找到两个孩子中最大的节点
+            if (childIndex + 1 < data.getSize() &&
+                    data.get(childIndex + 1).compareTo(data.get(childIndex)) > 0) {
+                childIndex = getRightChildIndex(index);
+            }
+            if (data.get(index).compareTo(data.get(childIndex)) >= 0) {
+                break;
+            }
+            data.swap(index, childIndex);
+            index = childIndex;
+        }
+    }
+```
 
