@@ -215,7 +215,7 @@ public class Array<E> {
      */
     private void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
-        for (int i = 0; i < data.length; i++) {
+        for (int i = 0; i < size; i++) {
             newData[i] = data[i];
         }
         data = newData;
