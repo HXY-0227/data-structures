@@ -2,6 +2,8 @@ package com.heap;
 
 import com.array.Array;
 
+import java.util.Random;
+
 /**
  * 最大堆
  *
@@ -12,12 +14,32 @@ import com.array.Array;
 public class MaxHeap<E extends Comparable<E>> {
     private Array<E> data;
 
+    /**
+     * 构造固定容量的最大堆
+     *
+     * @param capacity 容量
+     */
     public MaxHeap(int capacity) {
         data = new Array<>(capacity);
     }
 
+    /**
+     * 默认构造函数
+     */
     public MaxHeap() {
         data = new Array<>();
+    }
+
+    /**
+     * 将任意一个数组转化成最大堆的构造函数，时间复杂度O(N), 遍历构造的时间复杂度为O(nlogN)
+     *
+     * @param arr 数组
+     */
+    public MaxHeap(E[] arr) {
+        data = new Array<>(arr);
+        for (int i = getParentIndex(arr.length - 1); i >=0; i--) {
+            siftDown(i);
+        }
     }
 
     /**
@@ -143,20 +165,39 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
-    public static void main(String[] args) {
-        MaxHeap heap = new MaxHeap();
-        heap.add(90);
-        heap.add(80);
-        heap.add(100);
-        heap.add(70);
-        heap.add(60);
-        heap.add(50);
-        heap.add(10);
-        heap.add(25);
-        System.out.println(heap.data);
-        System.out.println(heap.extractMax());
-        System.out.println(heap.data);
+    /**
+     * 取出堆中最大元素，并替换
+     *
+     * @param e
+     * @return 堆中的最大元素
+     */
+    public E replace(E e) {
+        E maxItem = findMax();
+        data.set(0, e);
+        siftDown(0);
+        return maxItem;
+    }
 
+    public static void main(String[] args) {
+        int n = 10000;
+        MaxHeap<Integer> heap = new MaxHeap<>();
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            heap.add(random.nextInt(Integer.MAX_VALUE));
+        }
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = heap.extractMax();
+        }
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i-1] < arr[i]) {
+                throw new IllegalArgumentException("Error");
+            }
+
+        }
+        System.out.println("OK");
     }
 
 }

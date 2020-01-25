@@ -21,6 +21,18 @@ public class Array<E> {
     }
 
     /**
+     * 构造函数，将一个数组转化为动态数组
+     *
+     * @param arr 数组
+     */
+    public Array(E[] arr) {
+        data = (E[]) new Object[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+        size = arr.length;
+    }
+    /**
      * 获取数组的长度
      * @return 数组的长度
      */
