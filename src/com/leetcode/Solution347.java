@@ -8,6 +8,7 @@ import java.util.*;
 public class Solution347 {
 
     public static List<Integer> topKFrequent(int[] nums, int k) {
+        // 第一步，建立一个key：元素值----value：出现频率的哈希表
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
             if (map.containsKey(num)) {
@@ -21,6 +22,8 @@ public class Solution347 {
                 (a, b) -> map.get(a) - map.get(b)
         );
 
+        // 维护一个大小为k的最小堆，每次新加元素和堆顶元素进行比较，如果新元素的频率大于堆顶元素，则将堆顶元素
+        // 替换为新加入的元素，
         for (int key: map.keySet()) {
             if (queue.size() < k) {
                 queue.add(key);
@@ -30,6 +33,7 @@ public class Solution347 {
             }
         }
 
+        // 输出堆
         LinkedList<Integer> result = new LinkedList<>();
         while (!queue.isEmpty()) {
             result.add(queue.remove());
