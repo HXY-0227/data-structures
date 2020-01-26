@@ -17,12 +17,9 @@ public class Solution347 {
             }
         }
 
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return 01 - 02;
-            }
-        });
+        PriorityQueue<Integer> queue = new PriorityQueue<>(
+                (a, b) -> map.get(a) - map.get(b)
+        );
 
         for (int key: map.keySet()) {
             if (queue.size() < k) {
