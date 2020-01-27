@@ -1,5 +1,11 @@
 package com.queue;
 
+/**
+ * 循环队列对数组的实现方式做了优化，出队和入队时间复杂度为O(1)
+ *
+ * @author HXY
+ * @since 2020-1-28
+ */
 public class LoopQueue<E> implements Queue<E> {
 
     private E[] data;
