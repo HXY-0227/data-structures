@@ -156,8 +156,46 @@ public class LinkedList<E> {
         return false;
     }
 
-    public void remove(int index) {
+    /**
+     * 删除指定索引的元素
+     *
+     * @param index 索引
+     * @return 删除的元素
+     */
+    public E remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("index Illegal");
+        }
 
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+
+        Node deleteNode = prev.next;
+        prev.next = deleteNode.next;
+        deleteNode.next = null;
+        size--;
+
+        return deleteNode.e;
+    }
+
+    /**
+     * 删除第一个元素
+     *
+     * @return
+     */
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * 删除最后一个元素
+     *
+     * @return
+     */
+    public E removeLast() {
+        return remove(size - 1);
     }
 
     /**
