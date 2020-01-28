@@ -16,10 +16,24 @@ public class Solution203 {
         ListNode(int x) {
             val = x;
         }
+
+        // 以当前节点为头结点的链表信息字符串
+        @Override
+        public String toString(){
+
+            StringBuilder s = new StringBuilder();
+            ListNode cur = this;
+            while(cur != null){
+                s.append(cur.val + "->");
+                cur = cur.next;
+            }
+            s.append("NULL");
+            return s.toString();
+        }
     }
 
     public ListNode removeElements(ListNode head, int val) {
-        // 这种也能通过，没有第二种方案好，感觉第二种思路更清晰，代码更少
+        // 方案1：这种也能通过，没有第二种方案好，感觉第二种思路更清晰，代码更少
         /*if (head == null) {
             return null;
         }
@@ -41,8 +55,8 @@ public class Solution203 {
             }
         }*/
 
-        // 建立哨兵节点，官方解答
-        ListNode sentinel = new ListNode(0);
+        // 方案2：建立哨兵节点，官方解答
+        /*ListNode sentinel = new ListNode(0);
         sentinel.next = head;
         ListNode prev = sentinel, cur = head;
         while (cur != null) {
@@ -53,12 +67,20 @@ public class Solution203 {
             }
             cur = cur.next;
         }
-        return head;
+        return head;*/
+
+        // 方案3：通过递归解决是真牛逼
+        if (head == null) {
+            return null;
+        }
+
+        head.next = removeElements(head.next, val);
+        return head.val == val ? head.next : head;
     }
 
     public static void main(String[] args) {
         Solution203 solution = new Solution203();
-        solution.removeElements(solution.test(), 2);
+        System.out.println(solution.removeElements(solution.test(), 2));
     }
 
     public ListNode test() {
