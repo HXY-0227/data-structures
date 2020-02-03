@@ -1,5 +1,12 @@
 package com.set;
 
+/**
+ * 二叉搜索树实现set集合
+ *
+ * @author HXY
+ * @since 2020-2-3 武汉加油
+ *
+ */
 public class BSTSet<E extends Comparable<E>> implements Set<E> {
 
     private BST<E> bst;
@@ -10,12 +17,12 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
 
     @Override
     public void add(E e) {
-        bst.add(e);
+        bst.add(e);  //时间复杂度 O(logN) 平均，最差会退化成链表
     }
 
     @Override
     public void remove(E e) {
-        bst.remove(e);
+        bst.remove(e);  //时间复杂度 O(logN) 平均
     }
 
     @Override
@@ -30,7 +37,7 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
 
     @Override
     public boolean contains(E e) {
-        return bst.contains(e);
+        return bst.contains(e);   //时间复杂度 O(logN) 平均
     }
 
     public static void main(String[] args) {
