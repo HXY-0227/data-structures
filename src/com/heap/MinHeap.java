@@ -1,0 +1,141 @@
+package com.heap;
+
+/**
+ * 最小堆
+ *
+ * @author HXY
+ * @param <E>
+ */
+public class MinHeap<E extends Comparable<E>> {
+    private static final int DEFAULT_CAPACITY = 10;
+    private int size;
+    private E[] array;
+
+    /**
+     * 构造函数，构造指定容量的最小堆
+     */
+    public MinHeap(int capacity) {
+        array = (E[]) new Comparable[capacity];
+        size = 0;
+    }
+
+    /**
+     * 构造函数，构造容量为10的最小堆
+     */
+    public MinHeap() {
+        this(DEFAULT_CAPACITY);
+    }
+
+    /**
+     * 构造函数，将一个数组转化为最小堆
+     *
+     * @param items 数组
+     */
+    public MinHeap(E[] items) {
+        this(items.length);
+        for (int i = 1; i <= items.length; i++) {
+            array[i] = items[i];
+        }
+        buildHeap();
+        size = items.length;
+    }
+
+    private void buildHeap() {
+        for (int i = size / 2; i > 0; i--) {
+            siftDown(i);
+        }
+    }
+
+    /**
+     * 是否为空
+     * @return
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * 查找最小元素
+     *
+     * @return 堆顶元素
+     */
+    public E findMin() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Can not find min because the heap is empty.");
+        }
+
+        return array[0];
+    }
+
+    private void enlargeArray(int newCapacity) {
+        E[] newData = (E[]) new Comparable[newCapacity];
+        for (int i = 0; i < array.length; i++) {
+            newData[i] = array[i];
+        }
+        array = newData;
+    }
+
+    /**
+     * 添加元素
+     *
+     * @param e
+     */
+    public void insert(E e) {
+
+        if (array.length - 1 == size) {
+            enlargeArray(2 * array.length + 1);
+        }
+
+        // 如果使用交换的方法，需要三次赋值，一个元素上浮d层，就需要3d次赋值，我们这个方法优化可以只用d+1次赋值
+        int hole = ++size;
+        for (array[0] = e; e.compareTo(array[hole/2]) < 0; hole /= 2) {
+            array[hole] = array[hole/2];
+        }
+        array[hole] = e;
+    }
+
+    /**
+     * 删除堆顶元素
+     *
+     * @return 堆顶元素
+     */
+    public E deleteMin() {
+        E minItem = findMin();
+        array[1] = array[size--];
+        siftDown(1);
+        return minItem;
+    }
+
+    /**
+     * 下沉操作
+     *
+     * @param hole 开始下沉的位置
+     */
+    private void siftDown(int hole) {
+        int child = 0;
+        E tmp = array[hole];
+        for (; hole * 2 <= size; hole = child) {
+            child = hole * 2;
+            if (child != size
+                    && array[child + 1].compareTo(array[child]) < 0) {
+                child++;
+            }
+            if (array[child].compareTo(tmp) < 0) {
+                array[hole] = array[child];
+            } else {
+                break;
+            }
+        }
+        array[hole] = tmp;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[] {11, 21, 16, 8, 31, 19, 68, 62, 26, 32};
+        MinHeap<Integer> heap = new MinHeap<>();
+        for (int i = 0; i < arr.length; i++) {
+            heap.insert(arr[i]);
+        }
+        heap.insert(14);
+    }
+
+}
