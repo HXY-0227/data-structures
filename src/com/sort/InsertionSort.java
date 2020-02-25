@@ -28,8 +28,8 @@ public class InsertionSort {
         arr[j] = tmp;
     }*/
 
-    // 方案1的优化 没有明显的使用交换方法
-    public static void sort(int[] arr) {
+    // 直接插入排序 方案1的优化 没有明显的使用交换方法
+    public static void insertSort(int[] arr) {
         int j = 0;
         for (int i = 1; i < arr.length; i++) {
             int tmp = arr[i];
@@ -40,9 +40,46 @@ public class InsertionSort {
         }
     }
 
+    // 折半插入排序
+    public static void binaryInsertSort(int[] arr) {
+        int j = 0;
+        for (int i = 1; i < arr.length; i++) {
+            int low = 0, high = i - 1, mid = 0;
+            int tmp = arr[i];
+            while (low <= high) {
+                mid = (low + high) / 2;
+                if (arr[i] < arr[mid]) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            for (j = i; j > high + 1; j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[high + 1] = tmp;
+        }
+    }
+
+    // 希尔排序
+    public static void shellSort(int[] arr) {
+        int j = 0;
+        // 1. 分组
+        for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+            // 2. 对每个组进行插入排序
+            for (int i = gap; i < arr.length; i++) {
+                int tmp = arr[i];
+                for (j = i; j >= gap && tmp < arr[j - gap]; j -= gap) {
+                    arr[j] = arr[j - gap];
+                }
+                arr[j] = tmp;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[] {34, 8, 64, 51, 32, 21};
-        sort(arr);
+        shellSort(arr);
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
