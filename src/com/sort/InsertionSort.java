@@ -33,7 +33,7 @@ public class InsertionSort {
         int j = 0;
         for (int i = 1; i < arr.length; i++) {
             int tmp = arr[i];
-            for (j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
+            for (j = i; j > 0 && tmp < arr[j - 1]; j--) {
                 arr[j] = arr[j - 1];
             }
             arr[j] = tmp;
@@ -78,8 +78,8 @@ public class InsertionSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[] {34, 8, 64, 51, 32, 21};
-        shellSort(arr);
+        int[] arr = new int[] {8, 1, 4, 9, 6, 3, 5, 2, 7, 0};
+        insertSort(arr);
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
