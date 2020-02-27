@@ -24,6 +24,8 @@ public class QuickSort {
             int pivot = media3(arr, left, right);
             int i = left, j = right - 1;
             for ( ; ;) {
+                // ++i，--j 实际上是在24行后，已经将left, right, (left + right) / 2中最小的放到了0位，
+                // 最大的放到了最后一位，将中值放到了倒数第二位，所以分割的时候i从left+1开始，j从right-2开始
                 while (arr[++i] < pivot) {}
                 while (arr[--j] > pivot) {}
                 if (i < j) {
@@ -39,9 +41,7 @@ public class QuickSort {
         } else {
             insertSort(arr, left, right);
         }
-
     }
-
 
     private static void insertSort(int[] arr, int left, int right) {
         int j = 0;
@@ -85,7 +85,7 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[] {8, 1, 4, 9, 6, 3, 5, 2, 7, 0, 22, 22, 2};
+        int[] arr = new int[] {8, 1, 4, 9, 6, 3, 5, 2, 7, 0};
         quickSort(arr, 0, arr.length - 1);
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");

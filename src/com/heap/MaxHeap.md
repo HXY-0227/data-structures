@@ -246,7 +246,9 @@ public class MinHeap<E extends Comparable<E>> {
 }
 ```
 
+## 时间复杂度分析
 
+通过二叉树的性质可以知道n个节点的完全二叉树深度为h = log<sub>2</sub>(n+1)，插入和删除堆顶元素的时候应用了堆的的调整算法siftDown()和siftUp()，循环的次数最多为h - 1, 所以删除的时间复杂度为O(log<sub>2</sub>n)，构建树的操作执行了n / 2次siftDown()，时间复杂度为O(n log<sub>2</sub>n)。
 
 ## leetcode 347题
 
