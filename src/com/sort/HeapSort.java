@@ -52,12 +52,14 @@ public class HeapSort {
     }
 
     /**
+     * 堆排序
      *
-     *
-     * @param arr
+     * @param arr 待排序数组
      */
     public static void heapSort(int[] arr) {
         buildHeap(arr);
+        // 遍历执行deleteMax方法，因为删除一个堆顶元素，堆尾元素就空出来了，
+        // 将删除的元素放到堆尾，这样就达到了排序效果，并且利用了堆的原始数组，节省了空间
         for (int i = arr.length - 1; i > 0; i--) {
             swapReference(arr, 0, i);
             siftDown(arr,0, i);
