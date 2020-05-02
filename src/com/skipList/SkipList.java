@@ -9,16 +9,30 @@ import java.util.Random;
  * @param <T>
  */
 public class SkipList<T> {
+    private class Node<E> {
+        //存储的数据
+        E val;
+
+        //分值，排序用
+        double score;
+
+        //指向下一个节点的指针
+        Node next;
+
+        //指向下一个层的指针
+        Node down;
+
+        public Node(E val, double score) {
+            this.val = val;
+            this.score = score;
+        }
+    }
 
     private static final int MAX_LEVEL = 1 << 6;
 
-    private SkipNode<T> top;
+    private Node<T> top;
     private int level = 0;
     private Random random = new Random();
-
-    public SkipList() {
-
-    }
 
     /**
      * 跳跃表的初始化
@@ -27,11 +41,11 @@ public class SkipList<T> {
     public SkipList(int level){
         this.level = level;
         int i = level;
-        SkipNode<T> temp = null;
-        SkipNode<T> prev = null;
+        Node<T> temp = null;
+        Node<T> prev = null;
         while (i-- != 0) {
-            temp = new SkipNode<T>(null, Double.MIN_VALUE);
-            temp.setDown(prev);
+            temp = new Node<T>(null, Double.MIN_VALUE);
+            temp.down = prev;
             prev = temp;
         }
 
@@ -57,25 +71,25 @@ public class SkipList<T> {
      */
     public T get(double score) {
 
-        SkipNode<T> t = top;
+        Node<T> t = top;
         while (t != null) {
-            if (t.getScore() == score) {
-                return t.getVal();
+            if (t.score == score) {
+                return t.val;
             }
 
-            if (t.getNext() == null) {
-                if (t.getDown() != null) {
-                    t = t.getDown();
+            if (t.next == null) {
+                if (t.down != null) {
+                    t = t.down;
                     continue;
                 }else {
                     return null;
                 }
             }
 
-            if (t.getNext().getScore() > score) {
-                t = t.getDown();
+            if (t.next.score > score) {
+                t = t.down;
             } else {
-                t = t.getNext();
+                t = t.next;
             }
 
         }
@@ -89,60 +103,60 @@ public class SkipList<T> {
      * @param val
      */
     public void put(double score, T val) {
-        SkipNode<T> t = top, cur = null;
+        Node<T> t = top, cur = null;
         //记录每一层当前节点的前驱结点
-        List<SkipNode<T>> path = new ArrayList<>();
+        List<Node<T>> path = new ArrayList<>();
         while (t != null) {
-            if (score == t.getScore()) {
+            if (score == t.score) {
                 cur = t;
                 break;//表示存在该值的点，表示需要更新该节点
             }
-            if (t.getNext() == null) {
+            if (t.next == null) {
                 path.add(t);//需要向下查找，先记录该节点
-                if (t.getDown() != null) {
-                    t = t.getDown();
+                if (t.down != null) {
+                    t = t.down;
                     continue;
                 } else {
                     break;
                 }
             }
-            if (t.getNext().getScore() > score) {
+            if (t.next.score > score) {
                 path.add(t);//需要向下查找，先记录该节点
-                if (t.getDown() == null) {
+                if (t.down == null) {
                     break;
                 }
-                t = t.getDown();
+                t = t.down;
             } else
-                t = t.getNext();
+                t = t.next;
         }
         if (cur != null) {
             while (cur != null) {
-                cur.setVal(val);
-                cur = cur.getDown();
+                cur.val = val;
+                cur = cur.down;
             }
         } else {//当前表中不存在score值的节点，需要从下到上插入
             int lev = getRandomLevel();
             if (lev > level) {//需要更新top这一列的节点数量，同时需要在path中增加这些新的首节点
-                SkipNode<T> temp = null;
-                SkipNode<T> prev = top;//前驱节点现在是top了
+                Node<T> temp = null;
+                Node<T> prev = top;//前驱节点现在是top了
                 while (level++ != lev) {
-                    temp = new SkipNode<T>(null, Double.MIN_VALUE);
+                    temp = new Node<T>(null, Double.MIN_VALUE);
                     path.add(0, temp);//加到path的首部
-                    temp.setDown(prev);
+                    temp.down = prev;
                     prev = temp;
                 }
                 top = temp;//头节点
                 level = lev;//level长度增加到新的长度
             }
             //从后向前遍历path中的每一个节点，在其后面增加一个新的节点
-            SkipNode<T> downTemp = null, temp = null, prev = null;
+            Node<T> downTemp = null, temp = null, prev = null;
 //            System.out.println("当前深度为"+level+",当前path长度为"+path.size());
             for (int i = level - 1; i >= level - lev; i--) {
-                temp = new SkipNode<T>(val, score);
+                temp = new Node<T>(val, score);
                 prev = path.get(i);
-                temp.setNext(prev.getNext());
-                prev.setNext(temp);
-                temp.setDown(downTemp);
+                temp.next= prev.next;
+                prev.next = temp;
+                temp.down = downTemp;
                 downTemp = temp;
             }
         }
@@ -154,22 +168,22 @@ public class SkipList<T> {
      */
     public void remove(double score) {
         //1,查找到节点列的第一个节点的前驱
-        SkipNode<T> t = top;
+        Node<T> t = top;
         while (t != null) {
-            if (t.getNext() == null) {
-                t = t.getDown();
+            if (t.next == null) {
+                t = t.down;
                 continue;
             }
             //此处应当随着每一层的查找，删除其对应的节点，因为不同层链表之间的数目是不确定的
-            if (t.getNext().getScore() == score) {
-                t.setNext(t.getNext().getNext());
-                t = t.getDown();
+            if (t.next.score == score) {
+                t.next = t.next.next;
+                t = t.down;
                 continue;
             }
-            if (t.getNext().getScore() > score) {
-                t = t.getDown();
+            if (t.next.score > score) {
+                t = t.down;
             } else {
-                t = t.getNext();
+                t = t.next;
             }
         }
     }
