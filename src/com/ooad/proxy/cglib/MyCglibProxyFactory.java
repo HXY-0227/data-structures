@@ -19,7 +19,7 @@ public class MyCglibProxyFactory implements MethodInterceptor {
         Enhancer enhancer = new Enhancer();
         // c就是目标对象
         enhancer.setSuperclass(c);
-        // 设置回调：对于代理类上所有方法的调用，都会调用CallBack，而Callback则需要实现intercept()方法进行拦
+        // 设置回调：对于代理类上所有方法的调用，都会调用CallBack，而Callback则需要实现intercept()方法进行拦截
         enhancer.setCallback(this);
         // 创建动态代理类对象并返回
         return enhancer.create();
@@ -32,7 +32,7 @@ public class MyCglibProxyFactory implements MethodInterceptor {
         // 这句代码最终会执行到我们目标对象中的方法
         // o代表的是目标对象执行后返回类型
         System.out.println(method.getName() + " begin...");
-        Object o = proxy.invokeSuper(obj, args);
+            Object o = proxy.invokeSuper(obj, args);
         System.out.println(method.getName() + " end...");
 
         return o;
