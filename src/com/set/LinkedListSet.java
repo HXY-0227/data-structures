@@ -26,7 +26,7 @@ public class LinkedListSet<E> implements Set<E> {
 
     @Override
     public void remove(E e) {
-        list.removeElement(e);   // O(N)
+        list.remove(e);   // O(N)
     }
 
     @Override
@@ -36,7 +36,7 @@ public class LinkedListSet<E> implements Set<E> {
 
     @Override
     public int getSize() {
-        return list.getSize();
+        return list.size();
     }
 
     @Override

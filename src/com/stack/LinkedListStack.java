@@ -12,7 +12,7 @@ public class LinkedListStack<E> implements Stack<E> {
 
     @Override
     public int getSize() {
-        return list.getSize();
+        return list.size();
     }
 
     @Override

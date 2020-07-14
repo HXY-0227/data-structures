@@ -1,45 +1,33 @@
 package com.list;
 
+import java.util.NoSuchElementException;
+
 /**
  * 链表
  *
  * @author HXY
  * @since 2020-1-27
  */
-public class LinkedList<E> {
+public class LinkedList<E> implements List<E>{
 
-    private class Node {
-        public E e;
-        public Node next;
+    private static class Node<E> {
+        E e;
+        Node<E> next;
 
-        public Node(E e, Node next) {
+        Node(E e, Node<E> next) {
             this.e = e;
             this.next = next;
         }
-
-        public Node(E e) {
-            this(e, null);
-        }
-
-        public Node() {
-            this(null, null);
-        }
-
-        @Override
-        public String toString() {
-            return e.toString();
-        }
     }
 
-    private Node dummyHead;
-    private int size;
+    private Node<E> head;
+    private Node<E> tail;
+    private int size = 0;
 
     public LinkedList() {
-        this.dummyHead = new Node();
-        this.size = 0;
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
@@ -48,136 +36,123 @@ public class LinkedList<E> {
     }
 
     /**
-     * 向指定位置添加元素 O(n)
+     * 向链表中添加元素，默认向尾部添加
      *
-     * @param index 指定索引
-     * @param e 新添加元素
+     * @param e e
      */
-    public void add(int index, E e) {
-        if (index > size || index < 0) {
-            throw new IllegalArgumentException("index is Illegal");
-        }
+    @Override
+    public void add(E e) {
+        linkLast(e);
+    }
 
-        Node prev = dummyHead;
-        for (int i = 0; i < index; i++) {
-            prev = prev.next;
+    private void linkLast(E e) {
+        final Node<E> currNode = tail;
+        final Node<E> newNode = new Node<>(e, null);
+        tail = newNode;
+        if (null == head) {
+            head = newNode;
+        } else {
+            currNode.next = newNode;
         }
-        prev.next = new Node(e, prev.next);
         size++;
     }
 
     /**
-     * 向链表头部添加元素  O(1)
+     * 向链表头部添加元素
      *
-     * @param e 新元素
+     * @param e e
      */
+    @Override
     public void addFirst(E e) {
-        add(0, e);
+        linkFirst(e);
+    }
+
+    private void linkFirst(E e) {
+        final Node<E> newNode = new Node<>(e, head);
+        head = newNode;
+        if (null == tail) {
+            tail = newNode;
+        }
+        size++;
     }
 
     /**
-     * 向链表尾部添加元素 O(n)
+     * 向指定位置添加元素
+     *
+     * @param index index
+     * @param e e
+     */
+    @Override
+    public void add(int index, E e) {
+        checkIndex(index);
+        if (index == 0) {
+            linkFirst(e);
+        } else if (index == size) {
+            linkLast(e);
+        } else {
+            linkAfter(index, e);
+        }
+        size++;
+    }
+
+    private void linkAfter(int index, E e) {
+        Node<E> helpNode = head;
+        for (int i = 0; i < index - 1; i++) {
+            helpNode = helpNode.next;
+        }
+        helpNode.next = new Node(e, helpNode.next);
+    }
+
+    /**
+     * 查找元素
+     *
+     * @param index index
+     * @return E e
+     */
+    @Override
+    public E get(int index) {
+        checkIndex(index);
+        Node<E> currNode = head;
+        for (int i = 0; i < index; i++) {
+            currNode = currNode.next;
+        }
+        return currNode.e;
+    }
+
+    /**
+     * 获取第一个元素
+     *
+     * @return E e
+     */
+    @Override
+    public E getFirst() {
+        return null == head ? null : head.e;
+    }
+
+    /**
+     * 获取最后一个元素
+     *
+     * @return E e
+     */
+    @Override
+    public E getLast() {
+        return null == tail ? null : tail.e;
+    }
+
+    /**
+     * 判断链表是否包含指定元素
      *
      * @param e
+     * @return
      */
-    public void addLast(E e) {
-        add(size, e);
-    }
-
-    /**
-     * 获取链表指定位置的数据
-     *
-     * @param index 索引
-     * @return 取到的值
-     */
-    public E get(int index) {
-        if (index > size || index < 0) {
-            throw new IllegalArgumentException("index is Illegal");
-        }
-
-        Node currentNode = dummyHead.next;
-        for (int i = 0; i < index; i++) {
-            currentNode = currentNode.next;
-        }
-
-        return currentNode.e;
-    }
-
-    /**
-     * 获取链表第一个节点的数据
-     *
-     * @return 取到的值
-     */
-    public E getFirst() {
-        return get(0);
-    }
-
-    /**
-     * 获取链表最后一个节点的数据
-     *
-     * @return 取到的值
-     */
-    public E getLast() {
-        return get(size - 1);
-    }
-
-    /**
-     * 更新链表的某个位置的数据 O(n)
-     *
-     * @param index 索引
-     * @param e 更新的值
-     */
-    public void set(int index, E e) {
-        if (index > size || index < 0) {
-            throw new IllegalArgumentException("index is Illegal");
-        }
-
-        Node currentNode = dummyHead.next;
-        for (int i = 0; i < index; i++) {
-            currentNode = currentNode.next;
-        }
-        currentNode.e = e;
-    }
-
-    /**
-     * 查找链表中是否包含指定元素  O(n)
-     *
-     * @param e 待查找的元素
-     * @return 查询结果
-     */
+    @Override
     public boolean contains(E e) {
-        Node currentNode = dummyHead.next;
-        while (currentNode != null) {
-            if (e.equals(currentNode.e)) {
+        for (Node<E> x = head; x != null; x = x.next) {
+            if (x.e == e) {
                 return true;
             }
-            currentNode = currentNode.next;
         }
         return false;
-    }
-
-    /**
-     * 删除指定索引的元素
-     *
-     * @param index 索引
-     * @return 删除的元素
-     */
-    public E remove(int index) {
-        if (index < 0 || index > size) {
-            throw new IllegalArgumentException("index Illegal");
-        }
-
-        Node prev = dummyHead;
-        for (int i = 0; i < index; i++) {
-            prev = prev.next;
-        }
-
-        Node deleteNode = prev.next;
-        prev.next = deleteNode.next;
-        deleteNode.next = null;
-        size--;
-
-        return deleteNode.e;
     }
 
     /**
@@ -185,8 +160,25 @@ public class LinkedList<E> {
      *
      * @return
      */
+    @Override
     public E removeFirst() {
-        return remove(0);
+        if (null == head) {
+            throw new NoSuchElementException("List is empty");
+        }
+        return unlinkFirst();
+    }
+
+    private E unlinkFirst() {
+        final Node<E> helpNode = head;
+        E e = helpNode.e;
+        head = helpNode.next;
+        if (null == head) {
+            tail = null;
+        }
+        helpNode.next = null;
+        helpNode.e = null;
+        size--;
+        return e;
     }
 
     /**
@@ -194,40 +186,80 @@ public class LinkedList<E> {
      *
      * @return
      */
+    @Override
     public E removeLast() {
-        return remove(size - 1);
+        return unlink(size - 2);
     }
 
     /**
-     * 删除元素
+     * 删除指定位置的元素
      *
-     * @param e 待删除元素
+     * @param index
+     * @return
      */
-    public void removeElement(E e) {
-        Node prev = dummyHead;
-        while (prev.next != null) {
-            if (e.equals(prev.next.e)) {
-                break;
-            }
-            prev = prev.next;
-        }
-        Node deleteNode = prev.next;
-        prev.next = deleteNode.next;
-        deleteNode.next = null;
-        size--;
+    @Override
+    public E remove(int index) {
+        return unlink(index - 2);
     }
 
-    @Override
-    public String toString(){
-        StringBuilder res = new StringBuilder();
+    private E unlink(int index) {
+        checkIndex(index);
 
-        Node cur = dummyHead.next;
-        while(cur != null){
-            res.append(cur + "->");
-            cur = cur.next;
+        Node<E> node = head;
+        for (int i = 0; i < index; i++) {
+            node = node.next;
         }
-        res.append("NULL");
+        Node<E> deleteNode = node.next;
+        E deleteElement = deleteNode.e;
+        node.next = deleteNode.next;
 
-        return res.toString();
+        deleteNode.next = null;
+        deleteNode.e = null;
+        size--;
+        return deleteElement;
+    }
+
+    /**
+     * 删除指定元素
+     *
+     * @param e
+     * @return
+     */
+    @Override
+    public boolean remove(E e) {
+        return removeElement(e);
+    }
+
+    private boolean removeElement(E e) {
+        if (head != null && head.e == e) {
+            removeFirst();
+            return true;
+        } else {
+            Node<E> helpNode = head;
+            while (helpNode != null && helpNode.next != null) {
+                if (e.equals(helpNode.next.e)) {
+                    break;
+                }
+                helpNode = helpNode.next;
+            }
+            if (null != helpNode && null != helpNode.next) {
+                Node<E> deleteNode = helpNode.next;
+                if (deleteNode.e == tail.e) {
+                    tail = helpNode;
+                }
+                helpNode.next = deleteNode.next;
+                deleteNode.next = null;
+                deleteNode.e = null;
+                size--;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("index is invalid");
+        }
     }
 }
