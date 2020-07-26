@@ -53,7 +53,7 @@ public class InfixToSuffix {
                     
                     // 若取得不是（）内的元素，并且当前栈顶元素的优先级>=对比元素 那就出栈插入队列
                     while(size >= 0 && !flag && PRIORITY_MAP.get(stack.peek()) >= PRIORITY_MAP.get(ch)){
-                        suffix.add(String.valueOf(stack.remove(size)));
+                        suffix.add(String.valueOf(stack.pop()));
                         size--;
                     }
                 }
