@@ -2,6 +2,13 @@ package com.stack;
 
 import com.array.Array;
 
+/**
+ * 顺序栈的实现
+ *
+ * @author HXY
+ * @date 2020-07-25
+ * @param <E>
+ */
 public class ArrayStack<E> implements Stack<E> {
 
     Array<E> array;
