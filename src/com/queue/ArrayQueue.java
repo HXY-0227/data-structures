@@ -2,6 +2,11 @@ package com.queue;
 
 import com.array.Array;
 
+/**
+ * 动态数组实现队列
+ *
+ * @param <E>
+ */
 public class ArrayQueue<E> implements Queue<E> {
 
     Array<E> array;
@@ -46,22 +51,11 @@ public class ArrayQueue<E> implements Queue<E> {
         res.append("front [");
         for(int i = 0 ; i < array.getSize() ; i ++){
             res.append(array.get(i));
-            if(i != array.getSize() - 1)
+            if(i != array.getSize() - 1){
                 res.append(", ");
+            }
         }
         res.append("] tail");
         return res.toString();
-    }
-
-    public static void main(String[] args) {
-        ArrayQueue<Integer> queue = new ArrayQueue<Integer>();
-        queue.enqueue(1);
-        queue.enqueue(2);
-        queue.enqueue(3);
-        queue.enqueue(4);
-        queue.enqueue(5);
-        System.out.println(queue);
-        queue.dequeue();
-        System.out.println(queue.getFront());
     }
 }

@@ -60,7 +60,7 @@ public class InfixToSuffix {
                 
                 if (ch != ')') {
                     stack.push(ch);
-                }else {
+                } else {
                     stack.pop();
                 }
             } 

@@ -10,27 +10,20 @@ public class LoopQueue<E> implements Queue<E> {
 
     private E[] data;
     private int front;
-    private int tail;
+    private int rear;
     private int size;
 
     public LoopQueue(int capacity) {
+        // 因为用了front = size - 1判断队列满，
+        // 所以实际初始化capacity的队列只能放capacity - 1个元素
         data = (E[]) new Object[capacity + 1];
         front = 0;
-        tail = 0;
+        rear = 0;
         size = 0;
     }
 
     public LoopQueue() {
         this(10);
-    }
-
-    /**
-     * 最多能放多少个元素
-     *
-     * @return
-     */
-    public int getCapacity() {
-        return data.length - 1;
     }
 
     @Override
@@ -40,16 +33,16 @@ public class LoopQueue<E> implements Queue<E> {
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return rear == front;
     }
 
     @Override
     public void enqueue(E e) {
-        if ((tail + 1) % data.length == front) {
-            resize(getCapacity() * 2);
+        if (isFull()) {
+            throw new ArrayIndexOutOfBoundsException("queue is full");
         }
-        data[tail] = e;
-        tail = (tail + 1) % data.length;
+        data[rear] = e;
+        rear = (rear + 1) % data.length;
         size++;
     }
 
@@ -63,9 +56,6 @@ public class LoopQueue<E> implements Queue<E> {
         data[front] = null;
         front = (front + 1) % data.length;
         size--;
-        if (size == getCapacity() / 4 && getCapacity() / 2 != 0) {
-            resize(getCapacity() / 2);
-        }
         return result;
     }
 
@@ -77,28 +67,24 @@ public class LoopQueue<E> implements Queue<E> {
         return data[front];
     }
 
-    private void resize(int newCapacity) {
-        E[] newData = (E[])new Object[newCapacity + 1];
-        for (int i = 0; i < size; i++) {
-            // 队首元素有可能不在数组开始，所以有一个偏移量
-            newData[i] = data[(i + front) % data.length];
+    // 队列是否满
+    private boolean isFull() {
+        if (size == 0) {
+            return false;
         }
-
-        data = newData;
-        front = 0;
-        tail = size;
+        return (rear + 1) % data.length == front;
     }
 
     @Override
     public String toString(){
-
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Queue: size = %d , capacity = %d\n", size, getCapacity()));
+        res.append(String.format("Queue: size = %d , capacity = %d\n", size, data.length - 1));
         res.append("front [");
-        for(int i = front ; i != tail ; i = (i + 1) % data.length){
+        for(int i = front ; i != rear ; i = (i + 1) % data.length){
             res.append(data[i]);
-            if((i + 1) % data.length != tail)
+            if((i + 1) % data.length != rear) {
                 res.append(", ");
+            }
         }
         res.append("] tail");
         return res.toString();
