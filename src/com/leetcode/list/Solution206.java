@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.list;
 
 /**
  * 链表反转

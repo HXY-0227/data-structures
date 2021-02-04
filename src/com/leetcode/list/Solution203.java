@@ -1,6 +1,4 @@
-package com.leetcode;
-
-import java.util.List;
+package com.leetcode.list;
 
 /**
  * https://leetcode-cn.com/problems/remove-linked-list-elements/
@@ -10,7 +8,7 @@ import java.util.List;
  * @since 2020-1-28
  */
 public class Solution203 {
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
         ListNode(int x) {

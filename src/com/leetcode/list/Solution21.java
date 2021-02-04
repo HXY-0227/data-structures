@@ -1,6 +1,4 @@
-package com.list.leetcode;
-
-import com.list.List;
+package com.leetcode.list;
 
 /**
  * https://leetcode-cn.com/problems/merge-two-sorted-lists/
@@ -9,7 +7,6 @@ import com.list.List;
  * 输出：1->1->2->3->4->4
  *
  * @author HXY
- * @date 2020-07-21
  */
 public class Solution21 {
 

@@ -1,8 +1,10 @@
-package com.list.leetcode;
+package com.leetcode.list;
 
 /**
  * https://leetcode-cn.com/problems/add-two-numbers/
  * 开始想着转化成两个整数相加来做，哎，链表白学了
+ *
+ * @author HXY
  */
 public class Solution2 {
 
@@ -13,8 +15,8 @@ public class Solution2 {
    }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dumyHead = new ListNode(0);
-        ListNode p = l1, q = l2, curr = dumyHead;
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = l1, q = l2, curr = dummyHead;
         int carry = 0;
         while (p != null || q != null) {
             int x = (p != null) ? p.val : 0;
@@ -33,7 +35,7 @@ public class Solution2 {
         if (carry > 0) {
             curr.next = new ListNode(carry);
         }
-        return dumyHead.next;
+        return dummyHead.next;
     }
 
     public static void main(String[] args) {
@@ -48,6 +50,6 @@ public class Solution2 {
         ListNode r3 = new ListNode(4);
         r1.next = r2;
         r2.next = r3;
-        addTwoNumbers(l1, r1);
+        ListNode listNode = addTwoNumbers(l1, r1);
     }
 }
