@@ -1,5 +1,9 @@
 package com.heap;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 最小堆
  *
@@ -8,6 +12,7 @@ package com.heap;
  */
 public class MinHeap<E extends Comparable<E>> {
     private static final int DEFAULT_CAPACITY = 10;
+    private static final int MAX_INDEX = 1;
     private int size;
     private E[] array;
 
@@ -55,41 +60,39 @@ public class MinHeap<E extends Comparable<E>> {
     }
 
     /**
-     * 查找最小元素
+     * 查找最大元素
      *
      * @return 堆顶元素
      */
-    public E findMin() {
+    public E findMax() {
         if (isEmpty()) {
-            throw new IllegalArgumentException("Can not find min because the heap is empty.");
+            throw new IllegalArgumentException("Can not find max because the heap is empty.");
         }
 
         return array[0];
     }
 
-    private void enlargeArray(int newCapacity) {
+    private void resize(int newCapacity) {
         E[] newData = (E[]) new Comparable[newCapacity];
-        for (int i = 0; i < array.length; i++) {
-            newData[i] = array[i];
-        }
+        System.arraycopy(array, 0, newData, 0, array.length);
         array = newData;
     }
 
     /**
      * 添加元素
      *
-     * @param e
+     * @param e e
      */
     public void insert(E e) {
 
         if (array.length - 1 == size) {
-            enlargeArray(2 * array.length + 1);
+            resize(2 * array.length + 1);
         }
 
         // 如果使用交换的方法，需要三次赋值，一个元素上浮d层，就需要3d次赋值，我们这个方法优化可以只用d+1次赋值
         int hole = ++size;
-        for (array[0] = e; e.compareTo(array[hole/2]) < 0; hole /= 2) {
-            array[hole] = array[hole/2];
+        for (array[0] = e; e.compareTo(array[hole / 2]) > 0; hole /= 2) {
+            array[hole] = array[hole / 2];
         }
         array[hole] = e;
     }
@@ -99,10 +102,16 @@ public class MinHeap<E extends Comparable<E>> {
      *
      * @return 堆顶元素
      */
-    public E deleteMin() {
-        E minItem = findMin();
-        array[1] = array[size--];
-        siftDown(1);
+    public E deleteMax() {
+        E minItem = findMax();
+        array[1] = array[size];
+        array[size--] = null;
+        siftDown(MAX_INDEX);
+
+        // 当元素个数变成总容量的1/4的时候，释放内存到
+        if (size == array.length / 4 && array.length / 2 != 0) {
+            resize(array.length / 2);
+        }
         return minItem;
     }
 
@@ -116,11 +125,10 @@ public class MinHeap<E extends Comparable<E>> {
         E tmp = array[hole];
         for (; hole * 2 <= size; hole = child) {
             child = hole * 2;
-            if (child != size
-                    && array[child + 1].compareTo(array[child]) < 0) {
+            if (child != size && array[child + 1].compareTo(array[child]) > 0) {
                 child++;
             }
-            if (array[child].compareTo(tmp) < 0) {
+            if (array[child].compareTo(tmp) > 0) {
                 array[hole] = array[child];
             } else {
                 break;
@@ -129,13 +137,15 @@ public class MinHeap<E extends Comparable<E>> {
         array[hole] = tmp;
     }
 
-    public static void main(String[] args) {
-        int[] arr = new int[] {11, 21, 16, 8, 31, 19, 68, 62, 26, 32};
-        MinHeap<Integer> heap = new MinHeap<>();
-        for (int i = 0; i < arr.length; i++) {
-            heap.insert(arr[i]);
-        }
-        heap.insert(14);
-    }
+//    public static void main(String[] args) {
+//        int[] arr = new int[] {99, 71, 56, 45, 31, 21, 30, 15, 18};
+//
+//        MinHeap<Integer> heap = new MinHeap<>();
+//        for (int value : arr) {
+//            heap.insert(value);
+//        }
+//        heap.insert(80);
+//        heap.deleteMax();
+//    }
 
 }
