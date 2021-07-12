@@ -202,7 +202,6 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
         }
 
         Queue<Node> queue = new LinkedList<>();
-        Queue<Node> levelQueue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             Node cur = queue.remove();
@@ -212,11 +211,6 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
             }
             if (null != cur.right) {
                 queue.add(cur.right);
-            }
-            if(queue.isEmpty()){
-                System.out.println();
-                queue.addAll(levelQueue);
-                levelQueue.clear();
             }
         }
     }
