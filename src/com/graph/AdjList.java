@@ -75,6 +75,13 @@ public class AdjList implements Graph{
 
     @Override
     public Iterator<Integer> dfs() {
+        // todo
+        return null;
+    }
+
+    @Override
+    public Iterator<Integer> bfs() {
+        // todo
         return null;
     }
 

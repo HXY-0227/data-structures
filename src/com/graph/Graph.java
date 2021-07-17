@@ -49,4 +49,10 @@ public interface Graph {
      * @return 遍历结果
      */
     Iterator<Integer> dfs();
+
+    /**
+     * 广度优先遍历
+     * @return 遍历结果
+     */
+    Iterator<Integer> bfs();
 }

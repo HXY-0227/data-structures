@@ -1,5 +1,7 @@
 package com.graph;
 
+import com.tree.BST.BST;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -19,14 +21,20 @@ public class AdjSet implements Graph{
     // 二维数组表示邻接矩阵
     private TreeSet<Integer>[] adj;
 
-    private boolean[] visited;
+    private final boolean[] dfsVisited;
 
-    private List<Integer> dfsResult;
+    private final boolean[] bfsVisited;
+
+    private final List<Integer> dfsResult;
+
+    private final List<Integer> bfsResult;
 
     public AdjSet(String fileName) {
         buildGraph(fileName);
-        visited = new boolean[vertex];
+        dfsVisited = new boolean[vertex];
+        bfsVisited = new boolean[vertex];
         dfsResult = new ArrayList<>();
+        bfsResult = new ArrayList<>();
     }
 
     @Override
@@ -82,15 +90,38 @@ public class AdjSet implements Graph{
     }
 
     private Iterator<Integer> dfs(int inputVertex) {
-        visited[inputVertex] = true;
+        dfsVisited[inputVertex] = true;
         dfsResult.add(inputVertex);
         for (Iterator<Integer> it = getAdjacentVertex(inputVertex); it.hasNext(); ) {
             int next = it.next();
-            if (!visited[next]) {
+            if (!dfsVisited[next]) {
                 dfs(next);
             }
         }
         return dfsResult.iterator();
+    }
+
+    @Override
+    public Iterator<Integer> bfs() {
+        return bfs(0);
+    }
+
+    private Iterator<Integer> bfs(int inputVertex) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(inputVertex);
+        bfsVisited[inputVertex] = true;
+        while (!queue.isEmpty()) {
+            Integer remove = queue.remove();
+            bfsResult.add(remove);
+            for (Iterator<Integer> it = getAdjacentVertex(remove); it.hasNext(); ) {
+                Integer next = it.next();
+                if (!bfsVisited[next]) {
+                    queue.add(next);
+                    bfsVisited[next] = true;
+                }
+            }
+        }
+        return bfsResult.iterator();
     }
 
     @Override
