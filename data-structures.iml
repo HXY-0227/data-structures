@@ -7,6 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="data-structures" level="project" />
+    <orderEntry type="library" exported="" name="data-structures" level="project" />
+    <orderEntry type="library" exported="" name="cglib-3.3.0" level="project" />
+    <orderEntry type="library" exported="" name="asm-8.0" level="project" />
   </component>
 </module>
