@@ -1,8 +1,15 @@
-package com.tree.BST;
+package com.tree.bst;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 二叉搜索树：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/树/二叉搜索树/BSTree.md
+ *
+ * @author HXY
+ * @param <K>
+ * @param <V>
+ */
 public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 
     private class Node {
@@ -86,8 +93,9 @@ public class BST<K extends Comparable<K>, V extends Comparable<V>> {
 
     /**
      * 是否包含元素e
-     * @param key
-     * @return
+     *
+     * @param key key
+     * @return true：包含  false：不包含
      */
     public boolean contains(K key) {
         return contains(root, key);

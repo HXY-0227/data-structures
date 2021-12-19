@@ -1,7 +1,9 @@
-package com.tree.RBTree;
+package com.tree.rbtree;
 
 /**
- * 红黑树
+ * 红黑树：https://gitee.com/hxy-0227/learn-note#https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/树/树结构的演变以及实现/树结构的演变以及实现.md#通过树结构的演变以及实现来辩证的看数据结构
+ *
+ * @author HXY
  * @param <K>
  * @param <V>
  */
