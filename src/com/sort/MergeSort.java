@@ -1,9 +1,9 @@
 package com.sort;
 
 /**
- * 归并排序
+ * 归并排序: https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/排序/归并排序.md
  *
- * @Author HXY
+ * @author HXY
  * @Date 2020/2/28
  */
 public class MergeSort {
@@ -62,13 +62,5 @@ public class MergeSort {
     public static void mergeSort(int[] arr) {
         int[] tmpArr = new int[arr.length];
         mergeSort(arr, tmpArr, 0, arr.length - 1);
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[]{21, 25, 25, 49, 8, 16, 31, 41};
-        mergeSort(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
     }
 }

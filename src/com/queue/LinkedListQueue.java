@@ -2,6 +2,7 @@ package com.queue;
 
 /**
  * 用链表实现队列，只在队首出队，在队尾入队，这样保证出队和入队都能保证O(1)的时间复杂度
+ * https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/线性表/队列/队列.md
  *
  * @author HXY
  * @since 2020-1-27 抗击病毒第三天

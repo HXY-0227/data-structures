@@ -1,9 +1,9 @@
 package com.sort;
 
 /**
- * 快速排序
+ * 快速排序: https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/排序/快速排序.md
  *
- * @Author HXY
+ * @author  HXY
  * @Date 2020/2/26
  */
 public class QuickSort {

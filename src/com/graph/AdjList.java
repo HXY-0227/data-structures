@@ -9,6 +9,7 @@ import java.util.Scanner;
 /**
  * 图的邻接表表示法
  * 空间复杂度：O(Vertex + Edge)  v个顶点，v个链表的引用，在加上节点的个数
+ * 文档：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/图论基础/图论基础及广度优先搜索和深入优先搜索算法.md
  *
  * @author : HXY
  * @date : 2021-07-12 22:37

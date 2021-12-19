@@ -3,7 +3,7 @@ package com.stack;
 import com.array.Array;
 
 /**
- * 顺序栈的实现
+ * 顺序栈的实现： https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/线性表/栈/栈.md
  *
  * @author HXY
  * @date 2020-07-25

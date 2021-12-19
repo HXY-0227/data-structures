@@ -1,9 +1,9 @@
 package com.sort;
 
 /**
- * 插入排序
+ * 插入排序: https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/排序/插入排序.md
  *
- * @Author HXY
+ * @author  HXY
  * @Date 2020/2/25
  */
 public class InsertionSort {
@@ -74,14 +74,6 @@ public class InsertionSort {
                 }
                 arr[j] = tmp;
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[] {8, 1, 4, 9, 6, 3, 5, 2, 7, 0};
-        insertSort(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
         }
     }
 }

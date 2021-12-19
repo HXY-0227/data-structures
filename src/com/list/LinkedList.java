@@ -3,7 +3,7 @@ package com.list;
 import java.util.NoSuchElementException;
 
 /**
- * 链表
+ * 链表：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/线性表/链表/链表.md
  *
  * @author HXY
  * @since 2020-1-27

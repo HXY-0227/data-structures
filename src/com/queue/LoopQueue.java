@@ -2,6 +2,7 @@ package com.queue;
 
 /**
  * 循环队列对数组的实现方式做了优化，出队和入队时间复杂度为O(1)
+ * https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/线性表/队列/队列.md
  *
  * @author HXY
  * @since 2020-1-28

@@ -6,6 +6,7 @@ import java.util.Random;
 
 /**
  * 最大堆
+ * 文档：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/堆&优先队列/MaxHeap.md
  *
  * @author HXY
  * @since 2020-1-18

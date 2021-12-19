@@ -1,10 +1,10 @@
 package com.sort;
 
 /**
- * 堆排序
+ * 堆排序：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/排序/堆排序.md
  *
- * @Author HXY
- * @Date 2020/2/27
+ * @author HXY
+ * @date 2020/2/27
  */
 public class HeapSort {
 

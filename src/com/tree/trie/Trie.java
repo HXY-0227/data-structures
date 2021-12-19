@@ -1,10 +1,10 @@
 package com.tree.trie;
 
-import org.w3c.dom.Node;
-
 import java.util.*;
 
 /**
+ * Trie树：https://gitee.com/hxy-0227/learn-note#https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/树/树结构的演变以及实现/树结构的演变以及实现.md#通过树结构的演变以及实现来辩证的看数据结构
+ *
  * @author : HXY
  * @date : 2021-10-16 11:48
  **/

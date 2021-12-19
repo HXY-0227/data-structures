@@ -1,7 +1,5 @@
 package com.list;
 
-import java.util.NoSuchElementException;
-
 /**
  * 通过添加头结点和尾结点的指针。优化尾插法的时间复杂度
  *

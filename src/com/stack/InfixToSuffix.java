@@ -3,6 +3,11 @@ package com.stack;
 import java.util.*;
 import java.util.Stack;
 
+/**
+ * 利用栈实现中缀转后缀表达式并且求值：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/线性表/栈/栈.md
+ *
+ * @author HXY
+ */
 public class InfixToSuffix {
 
     private static final Map<Character,Integer> PRIORITY_MAP = new HashMap<>();

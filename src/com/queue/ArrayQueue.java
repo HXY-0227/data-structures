@@ -3,7 +3,7 @@ package com.queue;
 import com.array.Array;
 
 /**
- * 动态数组实现队列
+ * 动态数组实现队列：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/线性表/队列/队列.md
  *
  * @param <E>
  */

@@ -1,10 +1,11 @@
-package com.tree.AVLTree;
+package com.tree.avltree;
 
-
-import com.FileUtil;
-
-import java.util.ArrayList;
-
+/**
+ * AVL树的实现：https://gitee.com/hxy-0227/learn-note/blob/master/数据结构/树/AVL树/AVLTree.md
+ *
+ * @param <K>
+ * @param <V>
+ */
 public class AVLTree<K extends Comparable<K>, V> {
 
     private class Node {
